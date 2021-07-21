@@ -1,4 +1,4 @@
-#!/usr/bin python3
+#!/usr/bin/env python3
 """Learning Async in python"""
 import asyncio
 import random
