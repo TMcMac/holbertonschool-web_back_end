@@ -42,7 +42,8 @@ class BasicCache(BaseCaching):
         """
         Retrieves items from self.cache_data by key
         """
-        if key is not None:
+        try:
             return self.cache_data[key]
-        else:
+        except:
+            error = "Somthing"
             pass
