@@ -30,7 +30,10 @@ class BasicCache(BaseCaching):
         """
         Adds key value pairs to self.cache_data
         """
-        self.cache_data[key] = item
+        if key is not None and item is not None:
+            self.cache_data[key] = item
+        else:
+            pass
 
     def get(self, key):
         """
