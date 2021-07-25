@@ -44,6 +44,5 @@ class BasicCache(BaseCaching):
         """
         try:
             return self.cache_data[key]
-        except:
-            error = "Somthing"
+        except Exception:
             pass
