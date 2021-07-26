@@ -45,13 +45,13 @@ class LIFOCache(BaseCaching):
             if key in keyList:
                 del self.cache_data[key]
                 keyList.remove(key)
-            self.cache_data[key] = item
-            keyList.append(key)
-
-            if len(keyList) > BaseCaching.MAX_ITEMS:
+            if (len(keyList) + 1) > BaseCaching.MAX_ITEMS:
                 remove = keyList.pop()
                 print("DISCARD: " + remove)
                 del self.cache_data[remove]
+            self.cache_data[key] = item
+            keyList.append(key)
+
         else:
             pass
 
