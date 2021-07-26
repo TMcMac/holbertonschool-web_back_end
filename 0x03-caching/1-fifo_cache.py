@@ -31,8 +31,6 @@ class FIFOCache(BaseCaching):
     This class will inherit self.cache_data from BaseCashing
     but wil not have a limit
     """
-
-
     def __init__(self):
         """
         Init from BaseCaching
@@ -49,11 +47,12 @@ class FIFOCache(BaseCaching):
                 del self.cache_data[key]
                 keyList.remove(key)
             self.cache_data[key] = item
+            keyList.append(key)
 
             if len(keyList) > BaseCaching.MAX_ITEMS:
                 remove = keyList.pop(0)
-                print("DISCARD: " + key)
-                del self.cache_data[key]
+                print("DISCARD: " + remove)
+                del self.cache_data[remove]
         else:
             pass
 
