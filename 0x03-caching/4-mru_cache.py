@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Create a class LRUCache that inherits from BaseCaching
+Create a class MRUCache that inherits from BaseCaching
 and is a caching system:
 
 * You must use self.cache_data - dictionary from the parent
@@ -14,7 +14,7 @@ and is a caching system:
     - If key or item is None, this method should not do anything.
     - If the number of items in self.cache_data is higher that
       BaseCaching.MAX_ITEMS:
-          + you must discard  least recently used item (LRU algorithm)
+          + you must discard  most recently used item (MRU algorithm)
           + you must print DISCARD: with the key discarded and
             following by a new line
 
@@ -27,7 +27,7 @@ from base_caching import BaseCaching
 from datetime import datetime
 
 
-class LRUCache(BaseCaching):
+class MRUCache(BaseCaching):
     """
     This class will inherit self.cache_data from BaseCashing
     """
@@ -48,7 +48,7 @@ class LRUCache(BaseCaching):
                 del self.cache_data[key]
                 keyList.remove(key)
             if (len(keyList) + 1) > BaseCaching.MAX_ITEMS:
-                lru = min(self.cacheDict.keys())
+                lru = max(self.cacheDict.keys())
                 remove = self.cacheDict[lru]
                 self.cacheDict.pop(lru)
                 print("DISCARD: " + remove)
