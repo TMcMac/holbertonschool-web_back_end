@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """
-    Write a function named index_range that
-    takes two integer arguments page and
-    page_size.
+Replicate code from the previous task.
 
-    The function should return a tuple of size
-    two containing a start index and an end index
-    corresponding to the range of indexes to return
-    in a list for those particular pagination parameters.
+Implement a get_hyper method that takes the same arguments (and defaults) as get_page and returns a dictionary containing the following key-value pairs:
 
-    Page numbers are 1-indexed, i.e. the first page
-    is page 1.
+page_size: the length of the returned dataset page
+page: the current page number
+data: the dataset page (equivalent to return from previous task)
+next_page: number of the next page, None if no next page
+prev_page: number of the previous page, None if no previous page
+total_pages: the total number of pages in the dataset as an integer
+Make sure to reuse get_page in your implementation.
+
+You can use the math module if necessary.
 """
 import csv
 import math
@@ -74,4 +76,38 @@ class Server:
             start = ((page - 1) * page_size)
             end = (start + page_size)
         payload = (start, end)
+        return payload
+
+    def get_hyper(self, page, page_size) -> dict:
+        """
+        Returning a dictionary of details
+        """
+        payload = {}
+        # first lets do the easy stuff
+        payload['page'] = page
+        payload['data'] = self.get_page(page, page_size)
+        payload['page_size'] = len(payload['data'])
+
+        # ok now the prev and next if valid
+        fullData = self.dataset()
+        fullCount = len(fullData)
+        pageCount = fullCount / page_size
+
+        payload['total_pages'] = int(pageCount)
+
+        if pageCount > 1:
+            if page <= 1:
+                payload['prev_page'] = None
+            else:
+                payload['prev_page'] = page - 1
+
+            if page >= pageCount:
+                payload['next_page'] = None
+            else:
+                payload['next_page'] = page + 1
+        else:
+            payload['prev_page'] = None
+            payload['next_page'] = None
+
+
         return payload
