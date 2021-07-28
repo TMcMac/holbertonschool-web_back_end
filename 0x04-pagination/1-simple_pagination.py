@@ -41,25 +41,25 @@ class Server:
         check that page and page_size are valid
         and then return the proper data in a list
         """
+        # make an empty list and gather all baby names
         results = []
-
-        #check vars are valid
+        fullData = self.dataset()
+        # check vars are valid
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
 
+        # get our range from page and page size
         location = self.index_range(page, page_size)
-        count = 0
-        
-        with open(self.DATA_FILE, newline='') as csvfile:
-            babyNames = csv.reader(csvfile)
-            for row in babyNames:
-                if count >= location[0] and count <= location[1]:
-                    results.append(row)
-                elif count > location[1]:
-                    break
-                count += 1
+
+        # If range is greater than data length, out of range
+        if len(fullData) < location[1]:
             return results
-        
+
+        # append the rsults and return
+        for i in range(location[0], location[1]):
+            results.append(fullData[i])
+            
+        return results
 
     def index_range(self, page, page_size) -> tuple:
         """
