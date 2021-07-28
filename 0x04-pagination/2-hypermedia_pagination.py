@@ -96,19 +96,13 @@ class Server:
         pageCount = fullCount / page_size
 
         payload['total_pages'] = int(pageCount)
+        payload['prev_page'] = None
+        payload['next_page'] = None
 
         if pageCount > 1:
-            if page <= 1:
-                payload['prev_page'] = None
-            else:
+            if page > 1:
                 payload['prev_page'] = page - 1
-
-            if page >= pageCount:
-                payload['next_page'] = None
-            else:
+            if page < pageCount:
                 payload['next_page'] = page + 1
-        else:
-            payload['prev_page'] = None
-            payload['next_page'] = None
 
         return payload
