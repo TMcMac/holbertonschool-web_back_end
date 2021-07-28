@@ -14,7 +14,7 @@
 """
 
 
-def index_range (page: int, page_size: int) -> tuple:
+def index_range(page: int, page_size: int) -> tuple:
     """
     Getting the starting and ending position for
     pagination.
