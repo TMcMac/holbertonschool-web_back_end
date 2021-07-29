@@ -93,7 +93,7 @@ class Server:
         # ok now the prev and next if valid
         fullData = self.dataset()
         fullCount = len(fullData)
-        pageCount = fullCount / page_size
+        pageCount = int(fullCount / page_size)
 
         payload['total_pages'] = int(pageCount)
         payload['prev_page'] = None
