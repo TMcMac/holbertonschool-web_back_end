@@ -21,13 +21,13 @@ import re
 from typing import List
 
 
-def filter_datum(fields:list[str],
-                 redaction:str,
-                 message:list,
-                 separator:str) -> str:
+def filter_datum(fields: List[str],
+                 redaction: str,
+                 message: str,
+                 separator: str) -> str:
     """Takes in a message and obsficates indicated fields"""
     for field in fields:
-            re.sub(field + '=' + '+' +  separator,
+            message = re.sub(field + '=' + '.+?' +  separator,
                    field + '=' + redaction + separator,
                    message)
     return message
