@@ -18,7 +18,7 @@
     to perform the substitution with a single regex.
 """
 import re
-from Type import List
+from typing import List
 
 
 def filter_datum(fields:list[str],
