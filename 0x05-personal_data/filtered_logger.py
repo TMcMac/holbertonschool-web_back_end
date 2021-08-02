@@ -9,7 +9,7 @@
     * redaction: a string representing by what the field
     will be obfuscated
     * message: a string representing the log line
-    * separator: a string representing by which character is 
+    * separator: a string representing by which character is
     separating all fields in the log line (message)
 
     The function should use a regex to replace occurrences of
@@ -27,8 +27,7 @@ def filter_datum(fields: List[str],
                  separator: str) -> str:
     """Takes in a message and obsficates indicated fields"""
     for field in fields:
-            message = re.sub(field + '=' + '.+?' +  separator,
-                   field + '=' + redaction + separator,
-                   message)
+        message = re.sub(field + '=' + '.+?' +  separator,
+                         field + '=' + redaction + separator,
+                         message)
     return message
-
