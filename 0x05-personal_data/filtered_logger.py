@@ -21,7 +21,7 @@ import re
 from Type import List
 
 
-def filter_datum(fields:list,
+def filter_datum(fields:list[str],
                  redaction:str,
                  message:list,
                  separator:str) -> str:
@@ -30,3 +30,5 @@ def filter_datum(fields:list,
             re.sub(field + '=' + '+' +  separator,
                    field + '=' + redaction + separator,
                    message)
+    return message
+
