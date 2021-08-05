@@ -25,7 +25,7 @@ def access_denied(error) -> str:
     """
     Uh Uh Uh. You didnt say the magic word
     """
-    return jsonify("error": "Unauthorized"}), 401
+    return jsonify({"error": "Unauthorized"}), 401
 
 
 if __name__ == "__main__":
