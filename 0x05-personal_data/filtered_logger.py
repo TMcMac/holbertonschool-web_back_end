@@ -77,6 +77,7 @@ def get_logger() -> logging.Logger:
 
     return logger
 
+
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """Returns a connector to the database"""
     host = os.environ["PERSONAL_DATA_DB_HOST"]
@@ -102,6 +103,7 @@ def filter_datum(fields: List[str],
                          field + '=' + redaction + separator,
                          message)
     return message
+
 
 if __name__ == '__main__':
     db = get_db()
