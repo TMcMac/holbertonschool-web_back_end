@@ -20,12 +20,21 @@ def not_found(error) -> str:
     """
     return jsonify({"error": "Not found"}), 404
 
+
 @app.errorhandler(401)
 def access_denied(error) -> str:
     """
     Uh Uh Uh. You didnt say the magic word
     """
     return jsonify({"error": "Unauthorized"}), 401
+
+
+@pp.errorhandler(403)
+def access_forbidden(error) -> str:
+    """
+    No cookies for you
+    """
+    return jsonify({"error": "Forbidden"}), 403
 
 
 if __name__ == "__main__":

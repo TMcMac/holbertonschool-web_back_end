@@ -25,10 +25,20 @@ def stats() -> str:
     stats['users'] = User.count()
     return jsonify(stats)
 
+
 @app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
 def unauthorized() -> str:
-    """ GET /api/v1/unauthorized
-    Return:
-      - unauthorized message
+    """ 
+    GET /api/v1/unauthorized
+    return unauthorized message
     """
     abort(401, description="UNAUTHORIZED")
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden() -> str:
+    """
+    GET /api/v1/forbidden
+    return 403 page
+    """
+    abort(403, description="FORBIDDEN")
