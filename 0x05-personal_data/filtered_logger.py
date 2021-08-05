@@ -17,6 +17,8 @@
     filter_datum should be less than 5 lines long and use re.sub
     to perform the substitution with a single regex.
 """
+import mysql.connector
+import os
 import re
 import logging
 from typing import List
