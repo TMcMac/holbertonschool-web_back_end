@@ -24,7 +24,6 @@ from typing import List, TypeVar
 class Auth():
     """See above"""
 
-
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Checking on the file path and authorization"""
         if path is None or excluded_paths is None or excluded_paths == []:
@@ -45,12 +44,10 @@ class Auth():
 
         return False
 
-
     def authorization_header(self, request=None) -> str:
         """to be added later"""
         if request is None or request.headers.get('Authorization') is None:
             return None
-
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Returns none"""
