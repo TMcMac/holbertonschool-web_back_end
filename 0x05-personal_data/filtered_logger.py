@@ -75,6 +75,20 @@ def get_logger() -> logging.Logger:
 
     return logger
 
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Returns a connector to the database"""
+    host = os.environ["PERSONAL_DATA_DB_HOST"]
+    user = os.environ["PERSONAL_DATA_DB_USERNAME"]
+    passwd = os.environ["PERSONAL_DATA_DB_PASSWORD"]
+    db = os.environ["PERSONAL_DATA_DB_NAME"]
+    connect = mysql.connector.connect(
+            host=host,
+            user=user,
+            passwd=passwd,
+            database=db
+    )
+    return connect
+
 
 def filter_datum(fields: List[str],
                  redaction: str,
@@ -86,3 +100,31 @@ def filter_datum(fields: List[str],
                          field + '=' + redaction + separator,
                          message)
     return message
+
+if __name__ == '__main__':
+    db = get_db()
+    cursor = db.cursor()
+    query = "SELECT group_concat(COLUMN_NAME) FROM INFORMATION_SCHEMA.COLUMNS\
+            WHERE TABLE_SCHEMA = 'my_db' AND TABLE_NAME = 'users';"
+    cursor.execute(query)
+
+    for row in cursor:
+        keys = row[0]
+
+    keys = keys.split(',')
+
+    cursor.execute("SELECT * FROM users;")
+    for row in cursor:
+        to_join = [f'{k}={v}' for k, v in zip(keys, row)]
+        message = "; ".join(to_join)
+        message += ';'
+        log_record = logging.LogRecord("user_data", logging.INFO, None, None,
+                                       message, None, None)
+
+        formatter = RedactingFormatter(fields=("name", "email", "phone", "ssn",
+                                               "password"))
+
+        print(formatter.format(log_record))
+
+    cursor.close()
+    db.close()
