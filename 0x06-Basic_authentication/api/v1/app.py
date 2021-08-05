@@ -29,7 +29,7 @@ def access_denied(error) -> str:
     return jsonify({"error": "Unauthorized"}), 401
 
 
-@pp.errorhandler(403)
+@app.errorhandler(403)
 def access_forbidden(error) -> str:
     """
     No cookies for you
