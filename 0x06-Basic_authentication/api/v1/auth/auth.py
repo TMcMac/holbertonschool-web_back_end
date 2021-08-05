@@ -17,7 +17,7 @@ Create the class Auth:
         that returns None - request will be the Flask request object
     This class is the template for authentication system you will implement.
 """
-from Flask import request
+from flask import request
 from typing import List, TypeVar
 
 
