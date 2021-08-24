@@ -45,5 +45,31 @@ class TestGetJson(unittest.TestCase):
             result = get_json(url)
             self.assertEqual(result, test_payload)
 
+
+class TestMemoize(unittest.TestCase):
+    """Class for memoize test"""
+    def test_memoize(self):
+        """
+        Test that when calling a_property twice,
+        the correct result is returned but a_method
+        is only called once using assert_called_once
+        """
+        class TestClass:
+
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method', return_value=42) as mock:
+            test = TestClass()
+            first = test.a_property
+            second = test.a_property
+            self.assertEqual(first, 42)
+            self.assertEqual(second, 42)
+            mock.assert_called_once()
+
 if __name__ == '__main__':
     unittest.main()
