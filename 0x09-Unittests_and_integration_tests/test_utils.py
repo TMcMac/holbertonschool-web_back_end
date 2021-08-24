@@ -32,9 +32,7 @@ class TestAccessNestedMap(unittest.TestCase):
 
 
 class TestGetJson(unittest.TestCase):
-    """ This class will test the function
-        get_json in utils.py
-    """
+    """ Test the function get_json in utils.py"""
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
@@ -43,9 +41,9 @@ class TestGetJson(unittest.TestCase):
         """ Use mock to test an http call and json return """
         with patch('requests.get') as mock_request:
             mock_request().json.return_value = test_payload
-            mock_resquest.assert_called_once()
+            mock_request.assert_called_once()
             result = get_json(url)
-            mock_request.assertEqual(result, test_payload)
+            self.assertEqual(result, test_payload)
 
 if __name__ == '__main__':
     unittest.main()
