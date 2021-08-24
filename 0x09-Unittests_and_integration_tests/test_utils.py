@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """ Tests for utils.py """
+import json
+import requests
 from parameterized import parameterized
 import unittest
 from unittest.mock import patch
