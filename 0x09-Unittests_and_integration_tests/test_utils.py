@@ -2,6 +2,7 @@
 """ Tests for utils.py """
 from parameterized import parameterized
 import unittest
+from unittest.mock import patch
 from utils import access_nested_map, get_json
 
 
@@ -38,11 +39,11 @@ class TestGetJson(unittest.TestCase):
     ])
     def test_get_json(self, url, test_payload):
         """ Use mock to test an http call and json return """
-        with unittest.mock.patch('requests.get') as mock:
-            mock().json.return_value = test_payload
-            mock.assert_called_once()
+        with patch('requests.get') as mock_request:
+            mock_request().json.return_value = test_payload
+            mock_resquest.assert_called_once()
             result = get_json(url)
-            mock.assertEqual(result, test_payload)
+            mock_request.assertEqual(result, test_payload)
 
 if __name__ == '__main__':
     unittest.main()
