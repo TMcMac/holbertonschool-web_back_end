@@ -6,7 +6,7 @@ app = Flask(__name__)
 babel = Babel(app)
 
 
-class Config(objet):
+class Config(object):
     """Class to set defualts for babel"""
     LANGUAGES = ["en", "fr"]
     Babel.default_locale = "en"
