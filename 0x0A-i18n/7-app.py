@@ -30,12 +30,17 @@ app.config.from_object(Config)
 def get_locale():
     """Get best langauge for user"""
     locale = request.args.get('locale')
-    if locale == 'fr' or\
-            g.user and g.user.get('locale') == 'fr' or\
-            request.headers.get('Accept-Language') and\
-            request.headers.get('Accept-Language').split()[0][:2] == 'fr' or\
-            Config.BABEL_DEFAULT_LOCALE == 'fr':
-        return 'fr'
+    if locale and locale in app.config['LANGUAGES']:
+        return locale
+
+    if g.user:
+        locale = g.user.get('locale')
+        if locale and locale in app.config['LANGUAGES']:
+            return locale
+
+    accepted = request.headers.get('Accept-Language')
+    if accepted and accepted in app.config['LANGUAGES']:
+        return accepted
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
@@ -48,6 +53,15 @@ def get_timezone():
             return tz
         except UnknownTimeZoneError:
             pass
+
+    if g.user:
+        tz = request.args.get('timezone')
+        if tz:
+            try:
+                timezone(tz)
+                return tz
+            except UnknownTimeZoneError:
+                pass
 
     return Babel.default_timezone
 
