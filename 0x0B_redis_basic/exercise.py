@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """ Learning some Redis """
+from functools import wraps
 import redis
 from typing import Callable, Optional, Union
 import uuid
