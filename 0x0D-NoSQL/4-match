@@ -1,0 +1,2 @@
+// Script to see all docs
+db.school.find({name: 'Holberton school'})
