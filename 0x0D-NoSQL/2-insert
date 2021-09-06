@@ -1,3 +1,5 @@
 // Script to create a doc and insert data
 
+use my_db
 school = {"name" : "Holberton school”"}
+db.my_db.insert(school)
