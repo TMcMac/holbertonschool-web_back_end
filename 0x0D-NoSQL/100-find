@@ -1,0 +1,2 @@
+// Lists documents that have a name: Holberton in the collection school
+db.school.find({name: {'$regex': '^Holberton'}})
