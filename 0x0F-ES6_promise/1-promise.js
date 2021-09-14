@@ -7,7 +7,7 @@ function getFullResponseFromAPI(success) {
                body: 'Success',
 	   });
 	} else {
-	    eject(new Error("Not the API you're looking for"));
+	    eject(new Error('The fake API is not working currently'));
 	}
     });	
 }
