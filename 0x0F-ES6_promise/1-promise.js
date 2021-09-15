@@ -1,4 +1,4 @@
-//Return a promise from a fake api call
+// Return a promise from a fake api call
 function getFullResponseFromAPI(success) {
   return new Promise((resolve, reject) => {
     if (success) {
