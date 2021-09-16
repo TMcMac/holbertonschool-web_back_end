@@ -1,53 +1,35 @@
 // Implement a class named HolbertonCourse
-class HolbertonCourse {
+export default class HolbertonCourse {
   constructor(name, length, students) {
-      if (typeOf (name) !== 'string') {
-      throw typeError('Name must be a string');
-      } else if (typeOf (length) !== 'number') {
-      throw typeError('Length must be a number');
-      } else if (!Array.isArray(students) || (
-      students.every((e) => typeof (e) !== 'string'))) {
-      throw typeError('Students must be an array of string')
-      }
-    this._name = name;
-    this._length = length;
-    this._students = students;
+    this.name = name;
+    this.length = length;
+    this.students = students;
   }
 
-    get name() {
-    return this._name;
-    }
+  // Name getter/setter method
+  set name(newName) {
+    if (typeof newName !== 'string') { throw new TypeError('Name must be a string'); }
+    this._name = newName;
+  }
 
-    set name(newName) {
-    if (typeOf (newName) !== 'string') {
-        throw typeError('Name must be a string');
-    } else {
-        this._name = newName;
-    }
-    }
+  get name() { return this._name; }
 
-    get length() {
-    return this._length;
-    }
-    set length(newLength) {
-    if (typeOf (newLength) !== 'number') {
-        throw typeError('Length must be a number');
-    } else {
-        this._length = newLength;
+  // Length getter/setter method
+  set length(newLength) {
+    if (typeof newLength !== 'number') { throw new TypeError('Length must be a number'); }
+    this._length = newLength;
+  }
 
-    }
-    }
+  get length() { return this._length; }
 
-    get students() {
-    return this._students;
+  // Students getter/setter method
+  set students(arrOfStudents) {
+    if (typeof arrOfStudents !== 'object') { throw new TypeError('Student array must be an array'); }
+    for (const student of arrOfStudents) {
+      if (typeof student !== 'string') { throw new TypeError('Students must only contain arrays'); }
     }
-    set students(newStudents) {
-    if (!Array.isArray(students) || (
-      students.every((e) => typeof (e) !== 'string'))) {
-          throw typeError('Students must be an array of string')
-    } else {
-        this._students = newStudents;
-    }
-    }
+    this._students = arrOfStudents;
+  }
+
+  get student() { return this._students; }
 }
-export default HolbertonCourse;
