@@ -20,7 +20,7 @@ class HolbertonCourse {
 
     set name(newName) {
     if (typeOf (newName) !== 'string') {
-        throw typeError('Name must be a string'):
+        throw typeError('Name must be a string');
     } else {
         this._name = newName;
     }
