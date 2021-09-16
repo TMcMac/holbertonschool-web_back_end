@@ -1,41 +1,25 @@
 // Implement a class named Currency
-class Currency {
+export default class Currency {
   constructor(code, name) {
-    if (typeOf (code) !== 'string') {
-      throw typeError('Code must be a string');
-    } else if (typeOf (name) !== 'string')	{
-      throw typeError('Name must be a string');
-    } else {
-      this._name = name;
-      this._code = code;
-    }
+    this.code = code;
+    this.name = name;
   }
 
-  get name() {
-    return this._name;
-  }
-  set name(newName) {
-    if (typeOf (newName) !== 'string')  {
-      throw typeError('Name must be a string');
-    } else {
-      this._name = newName;
-    }
-  }
+  get code() { return this._code; }
 
-  get code() {
-    return this._code;
-  }
   set code(newCode) {
-    if (typeOf (newCode) !== 'string')  {
-      throw typeError('Code must be a string');
-    } else {
-      this._code = newCode;
-    }
+    if (typeof newCode !== 'string') { throw Error('Currency must be a string'); }
+    this._code = newCode;
+  }
+
+  get name() { return this._name; }
+
+  set name(newName) {
+    if (typeof newName !== 'string') { throw Error('Name must be a string'); }
+    this._name = newName;
   }
 
   displayFullCurrency() {
-    return `${this._name} (${this._code})`;
+    return `${this.name} (${this.code})`;
   }
 }
-
-export default Currency;
