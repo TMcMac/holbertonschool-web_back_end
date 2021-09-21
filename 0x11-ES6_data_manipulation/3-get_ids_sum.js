@@ -3,7 +3,7 @@ import getListStudentIds from './1-get_list_student_ids';
 
 const getStudentIdsSum = (students) => {
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
-  const studentIds = getStudentIds(students);
+  const studentIds = getListStudentIds(students);
   return studentIds.reduce(reducer);
 };
 
